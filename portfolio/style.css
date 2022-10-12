@@ -1,16 +1,53 @@
 body{
     background-color: lightcyan;
-}
-
-.main{
     border: solid black 5px;
-    display:grid;
-    grid-template-columns: 50% 50%;
     min-height: 95vh;
+    min-width: 95vw;
 }
 
-.links{
+.header{
     display: grid;
-    align-content: center;
     justify-content: center;
+    align-content: center;
+    height: 70px;
+    border: solid 1px gray;
+}
+
+
+#hero{
+    display:flex;
+}
+
+#hero-text{
+    display:block;
+    margin:auto;
+    text-align: center;
+}
+
+#label{
+    font-weight: normal;
+    font-style: italic;
+}
+
+#hero-pic-div{
+    display:flex;
+    flex-direction: column;
+    min-height: 95vh
+}
+
+#hero-pic{
+    height: 95vh;
+    align-self: flex-end;
+}
+
+#about-header{
+    background-color: lightblue;
+}
+
+#experience-header{
+    background-color: rgb(134, 198, 154);
+}
+
+#contact-header{
+    background-color: rgb(219, 140, 140);
 }
