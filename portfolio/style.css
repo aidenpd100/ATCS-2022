@@ -1,8 +1,11 @@
+
+/* ALL PAGES */
+
 body{
-    background-color: lightcyan;
+    background-color: rgb(199, 255, 255);
     border: solid black 5px;
-    min-height: 95vh;
-    min-width: 95vw;
+    max-width: 98vw;
+    max-height: 95vh;
 }
 
 .header{
@@ -13,6 +16,11 @@ body{
     border: solid 1px gray;
 }
 
+/* HERO PAGE */
+
+.link  :hover{
+    color: rgba(169, 144, 0, 0.389);
+}
 
 #hero{
     display:flex;
@@ -40,14 +48,45 @@ body{
     align-self: flex-end;
 }
 
+/* ABOUT PAGE*/
+
 #about-header{
     background-color: lightblue;
 }
+
+/* EXPERIENCE PAGE */
 
 #experience-header{
     background-color: rgb(134, 198, 154);
 }
 
+#experience-content{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.experience-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#xc-experience{
+    border: 2px brown dotted;
+}
+
+#track-experience{
+    border: 2px black dotted;
+}
+
+/* CONTACT PAGE */
+
 #contact-header{
     background-color: rgb(219, 140, 140);
+}
+
+#contact-info{
+    text-align: center;
+    font-size: 15px;
 }
