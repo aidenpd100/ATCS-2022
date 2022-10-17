@@ -9,11 +9,23 @@ body{
 }
 
 .header{
-    display: grid;
-    justify-content: center;
-    align-content: center;
+    display: flex;
     height: 70px;
     border: solid 1px gray;
+}
+
+#header-text{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#home-button{
+    height: 30px;
+    margin-left: auto;
+}
+
+#bold{
+    font-weight: bold;
 }
 
 /* HERO PAGE */
@@ -37,12 +49,6 @@ body{
     font-style: italic;
 }
 
-#hero-pic-div{
-    display:flex;
-    flex-direction: column;
-    min-height: 95vh
-}
-
 #hero-pic{
     height: 95vh;
     align-self: flex-end;
@@ -52,6 +58,17 @@ body{
 
 #about-header{
     background-color: lightblue;
+}
+
+#about-text{
+    display:flex;
+    margin-left: 10px;
+    text-align: left;
+}
+
+#about-pic{
+    display:block;
+    max-width: 30%;
 }
 
 /* EXPERIENCE PAGE */
@@ -69,14 +86,16 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    overflow: scroll;
 }
 
 #xc-experience{
+    height: 75vh;
     border: 2px brown dotted;
 }
 
 #track-experience{
+    height: 75vh;
     border: 2px black dotted;
 }
 
