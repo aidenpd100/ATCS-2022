@@ -27,7 +27,7 @@ class User(Base):
                              overlaps="following")
     
     tweets = relationship("Tweet", back_populates="user")
-    
+
     def __repr__(self):
         return f"@{self.username}"
 
