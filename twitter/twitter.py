@@ -3,6 +3,8 @@ from database import init_db, db_session
 from datetime import datetime
 
 class Twitter:
+    active_user = None
+
     """
     The menu to print once a user has logged in
     """
@@ -57,8 +59,10 @@ class Twitter:
         new_user = User(username=handle, password=password)
         db_session.add(new_user)
         db_session.commit()
+        db_session.flush()
 
         print(f"Welcome {handle}!")
+        self.active_user = new_user
 
 
     """
@@ -74,6 +78,7 @@ class Twitter:
             for user in users:
                 if (username == user.username) & (password == user.password):
                     print(f"Welcome {user.username}!\n")
+                    self.active_user = user
                     correct = True
             if correct == False:
                 print("Invalid username or password")
@@ -108,10 +113,55 @@ class Twitter:
 
 
     def follow(self):
-        pass
+        users = db_session.query(User).all()
+        following = self.active_user.following
+        exists = False
+        new = True
+        while exists == False or new == False:
+            exists = False
+            new = True
+            follow = input("\nWho would you like to follow?\n")
+            for user in users:
+                if follow == user.username:
+                    exists = True
+                    followed_user = user
+                    for u in following:
+                        if follow == u.username:
+                            print("You already follow " + follow)
+                            new = False
+            if exists == False:
+                print("That user doesn't exist!")
+            elif exists == True & new == True:
+                self.active_user.following.append(followed_user)
+                db_session.commit()
+                print("You are now following " + follow)
+
 
     def unfollow(self):
-        pass
+        users = db_session.query(User).all()
+        following = self.active_user.following
+        exists = False
+        is_following = False
+        while exists == False or is_following == False:
+            exists = False
+            is_following = False
+            unfollow = input("\nWho would you like to unfollow?\n")
+            for user in users:
+                if unfollow == user.username:
+                    exists = True
+                    unfollowed_user = user
+                    for u in following:
+                        if unfollow == u.username:
+                            is_following = True
+            if exists == False:
+                print("That user doesn't exist!")
+            elif is_following == False:
+                print("You don't follow " + unfollow)
+            elif exists == True & is_following == True:
+                self.active_user.following.remove(unfollowed_user)
+                db_session.commit()
+                print("You no longer follow " + unfollow)
+
 
     def tweet(self):
         pass
@@ -142,24 +192,26 @@ class Twitter:
         print("Welcome to ATCS Twitter!")
         self.startup()
 
-        self.print_menu()
-        option = int(input(""))
+        while True:
+            self.print_menu()
+            option = int(input(""))
 
-        if option == 1:
-            self.view_feed()
-        elif option == 2:
-            self.view_my_tweets()
-        elif option == 3:
-            self.search_by_tag()
-        elif option == 4:
-            self.search_by_user()
-        elif option == 5:
-            self.tweet()
-        elif option == 6:
-            self.follow()
-        elif option == 7:
-            self.unfollow()
-        else:
-            self.logout()
-        
-        self.end()
+            if option == 1:
+                self.view_feed()
+            elif option == 2:
+                self.view_my_tweets()
+            elif option == 3:
+                self.search_by_tag()
+            elif option == 4:
+                self.search_by_user()
+            elif option == 5:
+                self.tweet()
+            elif option == 6:
+                self.follow()
+            elif option == 7:
+                self.unfollow()
+            else:
+                self.logout()
+                self.end()
+            
+
